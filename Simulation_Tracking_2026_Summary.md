@@ -7,10 +7,12 @@ It serves as a changelog and performance comparison log to track geometry, mass 
 
 ## 🧩 OpenRocket Simulations
 
-| **Simulation Name** | **Description** | **Original File** | **Created By** | **Date Created** | **Checked By** | **Date Checked** | **Min Stability (Cal)** | **Max Stability (Cal)** | **Velocity Off Rail (m/s)** | **Max Velocity (m/s)** | **Apogee (ft)** | **Mass (kg)** | **Comments** |
+| **Simulation Name** | **Description** | **Original File** | **Created By** | **Date Created** | **Checked By** | **Date Checked** | **Min Stability (%)** | **Max Stability (%)** | **Velocity Off Rail (m/s)** | **Max Velocity (m/s)** | **Apogee (ft)** | **Mass (kg)** | **Comments** |
 |----------------------|----------------|------------------|----------------|------------------|----------------|------------------|--------------------------|--------------------------|------------------------------|------------------------|----------------|----------------|---------------|
-| `2026Rocket_v1.0.ork` | First simulation with new length, updated component locations, and revised mass. Fins reused from previous “Up” configuration. | — | Quinn Lawson | 2025-10-13 | Nishok Deenadayalan | 2025-10-15 | 1.65 | 2.90 | 38 | 403 | 13 000 | 23.44 | — |
-| `2026Rocket_v2.0.ork` | Derived from v1.0, but **without the boat-tail**. | `2026Rocket_v1.0` | Nishok Deenadayalan | 2025-10-15 | — | — | 2.12 | 3.42 | 37.1 | 406 | 12 750 | 23.13 | Over-stable |
+| `2026Rocket_v1.0.ork` | First simulation with new length, updated component locations, and revised mass. Fins reused from previous “Up” configuration. | — | Quinn Lawson | 2025-10-13 | Nishok Deenadayalan | 2025-10-15 | - | - | 38 | 403 | 13 000 | 23.44 | — |
+| `2026Rocket_v1.1.ork` | Swept Delta fin configuration | `2026Rocket_v1.0` | Quinn Lawson | 2025-11-08 | - | - | 16.5 | 19.5 | 38 | 404 | 13293 | 23.4 | — |
+| `2026Rocket_v1.2.ork` | Larger Trapezoidal fin configuration | `2026Rocket_v1.0` | Quinn Lawson | 2025-11-09 | - | - | 16.4 | 18.8 | 38 | 400 | 12493 | 23.4 | — |
+| `2026Rocket_v2.0.ork` | Derived from v1.0, but **without the boat-tail**. | `2026Rocket_v1.0` | Nishok Deenadayalan | 2025-10-15 | — | — | - | - | 37.1 | 406 | 12 750 | 23.13 | Over-stable |
 
 ### **Summary of OpenRocket Progress**
 - v1.0 introduced revised airframe length and mass distribution; stability remained within design limits.  
