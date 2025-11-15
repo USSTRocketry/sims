@@ -12,6 +12,7 @@ It serves as a changelog and performance comparison log to track geometry, mass 
 | `2026Rocket_v1.0.ork` | First simulation with new length, updated component locations, and revised mass. Fins reused from previous “Up” configuration. | — | Quinn Lawson | 2025-10-13 | Nishok Deenadayalan | 2025-10-15 | - | - | 38 | 403 | 13 000 | 23.44 | — |
 | `2026Rocket_v1.1.ork` | Swept Delta fin configuration | `2026Rocket_v1.0` | Quinn Lawson | 2025-11-08 | - | - | 16.5 | 19.5 | 38 | 404 | 13293 | 23.4 | — |
 | `2026Rocket_v1.2.ork` | Larger Trapezoidal fin configuration | `2026Rocket_v1.0` | Quinn Lawson | 2025-11-09 | - | - | 16.4 | 18.8 | 38 | 400 | 12493 | 23.4 | Best overall stability currently |
+| `2026Rocket_v1.3.ork` | Swept fin configuration | `2026Rocket_v1.0` | Quinn Lawson | 2025-11-15 | - | - | 14.8 | 19.0 | 38 | 406 | 13683 | 23.4 | Highest apogee |
 | `2026Rocket_v2.0.ork` | Derived from v1.0, but **without the boat-tail**. | `2026Rocket_v1.0` | Nishok Deenadayalan | 2025-10-15 | — | — | - | - | 37.1 | 406 | 12 750 | 23.13 | Over-stable |
 
 ### **Summary of OpenRocket Progress**
