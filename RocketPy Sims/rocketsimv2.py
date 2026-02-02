@@ -1,12 +1,9 @@
 from datetime import datetime
 from time import process_time, perf_counter, time
 import glob
-
 from rocketpy import Environment, SolidMotor, Rocket, Flight, Function
-
 import numpy as np
 from numpy.random import normal, uniform, choice
-
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 
