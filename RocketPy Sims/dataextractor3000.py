@@ -29,7 +29,7 @@ def extract_data_to_csv(input_file, output_file):
                 # Skip the next 5 lines of the block (or until blank line)
                 i += 6
             except (ValueError, IndexError):
-                # If conversion fails, just move to next line
+                
                 i += 1
         else:
             i += 1
@@ -37,7 +37,6 @@ def extract_data_to_csv(input_file, output_file):
     # Write to CSV
     with open(output_file, 'w', newline='') as csvfile:
         writer = csv.writer(csvfile)
-        # Optional: Add header row
         writer.writerow(['Mach', 'CD PWR OFF', 'CD PWR ON'])
         writer.writerows(data_rows)
     
@@ -48,7 +47,7 @@ def extract_data_to_csv(input_file, output_file):
         print(f"  {row}")
 
 if __name__ == "__main__":
-    input_file =
-    output_file =
+    input_file = #filepath
+    output_file = #filepath
     
     extract_data_to_csv(input_file, output_file)
