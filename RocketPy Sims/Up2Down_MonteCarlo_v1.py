@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import time
 from time import process_time
-
+import imageio.v2 as imageio
 from rocketpy import Environment, SolidMotor, Rocket, Flight, CompareFlights
 from numpy.random import normal, choice
 from scipy.stats import norm
@@ -244,8 +244,6 @@ def export_flight_error(flight_setting):
     dispersion_error_file.write(str(flight_setting) + "\n")
 
 
-# The following function is a Python representation of the C code that will be used on the rocket to detect the apogee condition. In the actual code, detection of negative velocity is achieved thanks to the readings from the IMU sensor
-
 
 def check_apogee(vertical_velocity, current_time, threshold=0.1):
 
@@ -291,7 +289,7 @@ def main_parachute_opening(apogee_detected:bool, altitude:float) -> bool:
 filename = BASE_DIR / "Up2Down"
 print("Filename is:")
 print(filename)
-number_of_simulations = 10
+number_of_simulations = 50
 # Create data files for inputs, outputs and error logging
 dispersion_error_file = open(str(filename) + ".disp_errors.txt", "w")
 dispersion_input_file = open(str(filename) + ".disp_inputs.json", "w")
@@ -326,12 +324,12 @@ Env.set_atmospheric_model(
 
     # REMOVE COMMENT FROM THE FOLLOWING SECTION TO RUN SIMULATION USING THESE SETTINGS ---------------------------------#
     #                                                                                                                   #
-    # type="custom_atmosphere",                                                                                         #
+     type="custom_atmosphere",                                                                                         #
     #                                                                                                                   #
-    # pressure = data["atmospheric_model_pressure_profile"][str(Env.date[3])],                                          #
-    # temperature= data["atmospheric_model_temperature_profile"][str(Env.date[3])],                                     #
-    # wind_u= data["atmospheric_model_wind_velocity_x_profile"][str(Env.date[3])],                                      #
-    # wind_v= data["atmospheric_model_wind_velocity_y_profile"][str(Env.date[3])]                                       #
+     pressure = data["atmospheric_model_pressure_profile"][str(Env.date[3])],                                          #
+     temperature= data["atmospheric_model_temperature_profile"][str(Env.date[3])],                                     #
+     wind_u= data["atmospheric_model_wind_velocity_x_profile"][str(Env.date[3])],                                      #
+     wind_v= data["atmospheric_model_wind_velocity_y_profile"][str(Env.date[3])])                                      #
     #                                                                                                                   #
     #-------------------------------------------------------------------------------------------------------------------#
       
@@ -391,16 +389,18 @@ Env.set_atmospheric_model(
     #-------------------------------------------------------------------------------------------------------------------#
 
     # =================================================================== OPTION 5: no wind ===================================================================
-    type = "custom_atmosphere",
-    wind_u = [
-        (0,0),
-        (4500,0),
-    ],
-    wind_v = [
-        (0,0),
-        (4500,0),
-    ]
-)
+
+   #REMOVE COMMENT TO RUN
+   ## type = "custom_atmosphere",
+    ## wind_u = [
+    #    (0,0),
+     #   (4500,0),
+   # ],
+    # wind_v = [
+      #  (0,0),
+       # (4500,0),
+   # ]
+# )
 
 # Set up parachute trigger for the drogue chute
 def simulator_check_drogue_opening(p, h, y):
@@ -1280,7 +1280,7 @@ for j in [1, 2, 3]:
         width=impactW * j,
         height=impactH * j,
         angle=impactTheta,
-        color="black",
+        color="red",
     )
     impactEll.set_facecolor((0, 0, 1, 0.2))
     impact_ellipses.append(impactEll)
@@ -1374,7 +1374,7 @@ target_variables_mean=[
 np.mean(dispersion_results["apogee_altitude"]),
 np.mean(dispersion_results["max_acceleration"])
 ]
-#plot the result of the sansitivity analysis
+#plot the result of the sensitivity analysis
 model.set_target_variables_nominal(target_variables_mean)
 
 model.fit(parameters_matrix, target_variables_matrix)
