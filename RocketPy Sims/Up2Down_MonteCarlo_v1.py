@@ -3,6 +3,7 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from datetime import datetime, timedelta
 import time
 from time import process_time
 import imageio.v2 as imageio
@@ -303,92 +304,37 @@ initial_cpu_time = process_time()
 
 # Define basic Environment object
 Env = Environment(
-    date = (2025, 8, 13, 16),  #(Year, Month, Day, Hour)
-    longitude=47.965, latitude=-81.870,
+    date = (2025, 8, 13, 15),  #(Year, Month, Day, Hour)
+    longitude=-81.870, latitude=47.965,
     elevation = 295,
     max_expected_height = 4500
 )
 
-# Import the .json file with the mean environment values
-with open(BASE_DIR /"""mean_environment_values.json""", "r") as f:
-    data = json.load(f)
+#EnvGFS.set_atmospheric_model(type="Forecast", file="GFS")
+
 
 # Set the environment model with either of the 3 options below
+#
 Env.set_atmospheric_model(
-      
-    # =================================================================== OPTION 1: average meteorological conditions ===================================================================
+     type="Ensemble",
+     file=str("lc2025v3.nc"),
+     # This section creates an updated dictionary to read the NetCDF4 files,
+     # as the built-in ECMWF dictionary inside RocketPy is outdated and can't read NetCDF4 files in the new format
+     dictionary= {
+         "ensemble": "number",
+         "time": "valid_time",
+         "latitude": "latitude",
+         "longitude": "longitude",
+         "level": "pressure_level",
+         "temperature": "t",
+         "surface_geopotential_height": None,
+         "geopotential_height": None,
+         "geopotential": "z",
+         "u_wind": "u",
+         "v_wind": "v",
+     })
 
-    # In order to define the mean environment features, we used the built-in function "Environment Analysis" from RocketPy. This generates a .json file with the mean environment values based on 
-    # a sample of 19 years, from 2005 to 2024, between the 10th and 15th of October, by feeding the NetCDF4 data from Copernicus. The .json file contains a series of .csv profiles based on the altitude 
-    # that define pressure, temperature and wind vectors on an hourly basis. For more information consult the "mean_environment_values.json" file inside the directory.
-
-    # REMOVE COMMENT FROM THE FOLLOWING SECTION TO RUN SIMULATION USING THESE SETTINGS ---------------------------------#
-    #                                                                                                                   #
-     type="custom_atmosphere",                                                                                         #
-    #                                                                                                                   #
-     pressure = data["atmospheric_model_pressure_profile"][str(Env.date[3])],                                          #
-     temperature= data["atmospheric_model_temperature_profile"][str(Env.date[3])],                                     #
-     wind_u= data["atmospheric_model_wind_velocity_x_profile"][str(Env.date[3])],                                      #
-     wind_v= data["atmospheric_model_wind_velocity_y_profile"][str(Env.date[3])])                                      #
-    #                                                                                                                   #
-    #-------------------------------------------------------------------------------------------------------------------#
-      
-    # =================================================================== OPTION 2: worst successful launch day recorded from past EuRoC editions ===================================================================
-
-    # We researched the worst weather conditions in which launches at EuRoC have still taken place, and found that 11/10/2024 qualified for being one of the most windy in which launches were still conducted. We used
-    # ensemble-type weather models to simulate flight operations using data from that day and evaluate predicted flight performance, finding that the apogee would be severely lowered, but would still be satisfactory.
-
-    # REMOVE COMMENT FROM THE FOLLOWING SECTION TO RUN SIMULATION USING THESE SETTINGS ---------------------------------#
-    #                                                                                                                   #
-    #  type="Ensemble",                                                                                                  #
-    #  file=str(BASE_DIR / """SantaMargarida_Ensemble_LaunchDayWeatherData.nc"""),                                        #
-    #  # This section creates an updated dictionary to read the NetCDF4 files,                                           #
-    #  # as the built-in ECMWF dictionary inside RocketPy is outdated and can't read NetCDF4 files in the new format     #
-    #  dictionary= {                                                                                                     #
-    #      "ensemble": "number",                                                                                         #
-    #      "time": "valid_time",                                                                                         #
-    #      "latitude": "latitude",                                                                                       #
-    #      "longitude": "longitude",                                                                                     #
-    #      "level": "pressure_level",                                                                                    #
-    #      "temperature": "t",                                                                                           #
-    #     "surface_geopotential_height": None,                                                                          #
-    #      "geopotential_height": None,                                                                                  #
-    #      "geopotential": "z",                                                                                          #
-    #      "u_wind": "u",                                                                                                #
-    #      "v_wind": "v",                                                                                                #
-    #  },                                                                                                                #
-    #                                                                                                                   #
-    #-------------------------------------------------------------------------------------------------------------------#
-
-    # =================================================================== OPTION 3: worst plausible case scenario ===================================================================
-
-    # To evaluate the worst case for bending stresses on the structure, we decided to run a simulation assuming constant winds as strong as the peak values in the worst day (11/10/2024) and aligned with the launch
-    # heading, causing the rocket to steer violently into the wind and generate high bending moment on the structure.
-
-    # REMOVE COMMENT FROM THE FOLLOWING SECTION TO RUN SIMULATION USING THESE SETTINGS ---------------------------------#
-                                                                                                                       #
-    #  type="custom_atmosphere",                                                                                         #
-    #  wind_u=[                                                                                                          #
-    #      (0, -1.5), # 10.60 m/s at 0 m                                                                                #
-    #      (4500, -1.5), # 10.60 m/s at 3000 m                                                                          #
-    #  ],                                                                                                                #
-    #  wind_v=[                                                                                                          #
-    #      (0, 0), # -16.96 m/s at 3000 m   
-    #      (4500, 0)                                                                     #
-    #  ],                                                                                                                #
-                                                                                                                       #
-    #-------------------------------------------------------------------------------------------------------------------#
-
-    # =================================================================== OPTION 4: actual weather forecast ===================================================================
-    
-    # REMOVE COMMENT FROM THE FOLLOWING SECTION TO RUN SIMULATION USING THESE SETTINGS ---------------------------------#
-                                                                                                                      #
-    # type = "forecast",                                                                                         #
-    # file = "GFS"                                                                                                            #
-                                                                                                                      #
-    #-------------------------------------------------------------------------------------------------------------------#
-
-    # =================================================================== OPTION 5: no wind ===================================================================
+    # =================================================================== no wind ===================================================================
 
    #REMOVE COMMENT TO RUN
    ## type = "custom_atmosphere",
@@ -1280,7 +1226,7 @@ for j in [1, 2, 3]:
         width=impactW * j,
         height=impactH * j,
         angle=impactTheta,
-        color="red",
+        color="black",
     )
     impactEll.set_facecolor((0, 0, 1, 0.2))
     impact_ellipses.append(impactEll)
