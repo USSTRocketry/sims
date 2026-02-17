@@ -279,9 +279,6 @@ def check_apogee(vertical_velocity, current_time, threshold=0.1):
         return False, None
     
 
-# The following function is a Python representation of the C code that will be used on the rocket to detect the main parachute opening condition. In the code, the height is determined by filtering barometer readings with a Kalman filter
- 
-
 def main_parachute_opening(apogee_detected:bool, altitude:float) -> bool:
     return apogee_detected and altitude <= 450.0 # meters 
 
@@ -304,17 +301,18 @@ initial_cpu_time = process_time()
 
 # Define basic Environment object
 Env = Environment(
-    date = (2025, 8, 13, 15),  #(Year, Month, Day, Hour)
+    date = (2025, 8, 11, 15),  #(Year, Month, Day, Hour)
     longitude=-81.870, latitude=47.965,
     elevation = 295,
     max_expected_height = 4500
 )
 
-#EnvGFS.set_atmospheric_model(type="Forecast", file="GFS")
+# OPTION 1: FORECAST
+
+#Env.set_atmospheric_model(type="Forecast", file="GFS")
 
 
-# Set the environment model with either of the 3 options below
-#
+# OPTION 2: REANALYSIS
 Env.set_atmospheric_model(
      type="Ensemble",
      file=str("lc2025v3.nc"),
@@ -334,9 +332,7 @@ Env.set_atmospheric_model(
          "v_wind": "v",
      })
 
-    # =================================================================== no wind ===================================================================
-
-   #REMOVE COMMENT TO RUN
+ # OPTION 3: NO WIND
    ## type = "custom_atmosphere",
     ## wind_u = [
     #    (0,0),
