@@ -1188,7 +1188,7 @@ from imageio import imread
 from matplotlib.patches import Ellipse
 
 # Import background map
-img = imread(str(BASE_DIR / """basemapv3.jpg"""))
+img = imread(str(BASE_DIR / """basemap_v3.jpg"""))
 
 # Retrieve dispersion data por apogee and impact XY position
 apogee_x = np.array(dispersion_results["apogee_x"])
