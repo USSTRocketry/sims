@@ -287,7 +287,7 @@ def main_parachute_opening(apogee_detected:bool, altitude:float) -> bool:
 filename = BASE_DIR / "Up2Down"
 print("Filename is:")
 print(filename)
-number_of_simulations = 50
+number_of_simulations = 10
 # Create data files for inputs, outputs and error logging
 dispersion_error_file = open(str(filename) + ".disp_errors.txt", "w")
 dispersion_input_file = open(str(filename) + ".disp_inputs.json", "w")
@@ -1188,7 +1188,7 @@ from imageio import imread
 from matplotlib.patches import Ellipse
 
 # Import background map
-img = imread(str(BASE_DIR / """basemap_v2.jpg"""))
+img = imread(str(BASE_DIR / """basemapv3.jpg"""))
 
 # Retrieve dispersion data por apogee and impact XY position
 apogee_x = np.array(dispersion_results["apogee_x"])
@@ -1269,11 +1269,11 @@ ax.set_xlabel("East (m)")
 # You can translate the basemap by changing dx and dy (in meters)
 dx = 0
 dy = 0
-plt.imshow(img, zorder=0, extent=[-1500-dx, 1500-dx, -1500-dy, 1500-dy])
+plt.imshow(img, zorder=0, extent=[-5000-dx, 5000-dx, -5000-dy, 5000-dy])
 plt.axhline(0, color="black", linewidth=0.5)
 plt.axvline(0, color="black", linewidth=0.5)
-plt.xlim(-1500, 1500)
-plt.ylim(-1500, 1500)
+plt.xlim(-5000, 5000)
+plt.ylim(-5000, 5000)
 
 # Save plot and show result
 plt.savefig(str(filename) + ".pdf", bbox_inches="tight", pad_inches=0)
