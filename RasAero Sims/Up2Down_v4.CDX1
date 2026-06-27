@@ -82,7 +82,7 @@
         <Thickness>0.2</Thickness>
         <LERadius>0.001</LERadius>
         <Location>9</Location>
-        <AirfoilSection>Hexagonal</AirfoilSection>
+        <AirfoilSection>Square</AirfoilSection>
         <FX1>0.5</FX1>
         <FX3>0.5</FX3>
       </Fin>
@@ -123,12 +123,12 @@
     <Comments />
   </RocketDesign>
   <LaunchSite>
-    <Altitude>90</Altitude>
+    <Altitude>950</Altitude>
     <Pressure>30</Pressure>
-    <RodAngle>3</RodAngle>
+    <RodAngle>1</RodAngle>
     <RodLength>16.25</RodLength>
     <Temperature>68</Temperature>
-    <WindSpeed>11.18</WindSpeed>
+    <WindSpeed>5</WindSpeed>
   </LaunchSite>
   <Recovery>
     <Altitude1>1000</Altitude1>
@@ -150,7 +150,7 @@
       <SustainerEngine>M3400-WT  (CTI)</SustainerEngine>
       <SustainerLaunchWt>51.67</SustainerLaunchWt>
       <SustainerNozzleDiameter>2.7</SustainerNozzleDiameter>
-      <SustainerCG>71.57</SustainerCG>
+      <SustainerCG>65.8</SustainerCG>
       <SustainerIgnitionDelay>0</SustainerIgnitionDelay>
       <Booster1LaunchWt>0</Booster1LaunchWt>
       <Booster1SeparationDelay>0</Booster1SeparationDelay>
@@ -164,9 +164,9 @@
       <Booster2NozzleDiameter>0</Booster2NozzleDiameter>
       <IncludeBooster2>False</IncludeBooster2>
       <FlightTime>0</FlightTime>
-      <TimetoApogee>30.91061</TimetoApogee>
-      <MaxAltitude>16903.45</MaxAltitude>
-      <MaxVelocity>1379.978</MaxVelocity>
+      <TimetoApogee>27.14053</TimetoApogee>
+      <MaxAltitude>13765.03</MaxAltitude>
+      <MaxVelocity>1337.525</MaxVelocity>
       <OptimumWt>27.77262</OptimumWt>
       <OptimumMaxAlt>27.77262</OptimumMaxAlt>
     </Simulation>
